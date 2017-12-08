@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Dashboard from '@/components/Dashboard'
 import Login from '@/components/Login'
-import Claims from '@/components/Claims'
+import Profile from '@/components/Profile'
+import Terminal from '@/components/Terminal'
 import { requireAuth } from '../auth'
 
 Vue.use(Router)
@@ -20,10 +21,14 @@ export default new Router({
       component: Login
     },
     {
-      path: '/claims',
-      name: 'Claims',
-      beforeEnter: requireAuth,
-      component: Claims
+      path: '/profile',
+      name: 'Profile',
+      component: Profile
+    },
+    {
+      path: '/terminal',
+      name: 'Terminal',
+      component: Terminal
     }
   ]
 })

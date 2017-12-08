@@ -1,156 +1,28 @@
 <template>
-  <div class="container">
-    <div class="">
-      <md-toolbar>
-        <div class="md-toolbar-container">
-          <md-button class="md-icon-button">
-            <md-icon>menu</md-icon>
-          </md-button>
-          <span style="flex: 1"></span>
-          <md-button class="md-icon-button"  @click="$refs.rightSidenav.toggle()">
-            <md-icon>view_module</md-icon>
-          </md-button>
-        </div>
-      </md-toolbar>
-      <div class="main-content">
-        <md-layout class="left-menu">
-          <md-menu md-size="4">
-            <md-list class="md-transparent">
-              <md-list-item md-menu-trigger>
-                <div class="md-list-text-container">
-                  <span>Paris</span>
-                  <span>Claim Handling</span>
-                </div>
-                <md-button class="md-icon-button">
-                  <md-icon>arrow_drop_down</md-icon>
-                </md-button>
-              </md-list-item>
-            </md-list>
-            <md-menu-content>
-              <md-menu-item>Claim Handling</md-menu-item>
-              <md-menu-item>Offer</md-menu-item>
-              <md-menu-item>Management</md-menu-item>
-            </md-menu-content>
-          </md-menu>
-          <div class="main-sidebar-links">
-            <md-list class="md-dense">
-              <md-list-item>
-                <router-link exact to="/"><md-icon md-icon-morph>dashboard</md-icon> Dashboard</router-link>
-              </md-list-item>
-
-              <md-list-item>
-                <router-link exact to="/claims"><md-icon md-icon-morph>edit</md-icon> Claims</router-link>
-              </md-list-item>
-            </md-list>
-          </div>
-        </md-layout>
-        <md-layout md-gutter>
-          <md-layout md-column md-gutter class="main-container">
-            <transition name="md-router" appear>
-              <router-view></router-view>
-            </transition>
-          </md-layout>
-          <md-layout md-column md-gutter md-flex="20">
-            right
-          </md-layout>
-        </md-layout>
-      </div>
-      <md-sidenav class="md-right" ref="rightSidenav">
-        <md-sidenav class="md-right" ref="rightSidenav">
-          <md-toolbar class="md-account-header">
-            <md-list class="md-transparent">
-              <md-list-item class="md-avatar-list">
-                <md-avatar class="md-large">
-                  <img src="https://placeimg.com/64/64/people/8" alt="People">
-                </md-avatar>
-                <div class="md-list-text-container">
-                  <br/>
-                  <span>Dau Den</span>
-                  <span>anh.nguyen@noria.no</span>
-                </div>
-              </md-list-item>
-            </md-list>
-          </md-toolbar>
-          <md-list>
-            <md-list-item @click="filterUsers()">
-              <md-icon>person</md-icon><span>My profile</span>
-            </md-list-item>
-            <md-list-item>
-              <md-icon>apps</md-icon><span>Themes  Color</span>
-              <div class="md-list-text-container">
-                <md-icon class="md-primary">border_clear</md-icon>
-                <md-icon class="md-warn">border_clear</md-icon>
-                <md-icon class="md-accent">border_clear</md-icon>
-              </div>
-            </md-list-item>
-            <md-list-item>
-              <md-icon>exit_to_app</md-icon><span>Logout</span>
-            </md-list-item>
-          </md-list>
-        </md-sidenav>
-      </md-sidenav>
-    </div>
-  </div>
+  <transition name="md-router" appear>
+    <router-view></router-view>
+  </transition>
 </template>
-
 <style lang="scss">
   @import 'stylesheets/variables.scss';
-
-  $sizebar-size: 240px;
-
-  html,
   body {
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0,0,0,.5);
+  }
+  body:before {
+    background: url('/static/img/background.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    content: "";
+    display: block;
     height: 100%;
-    overflow: hidden;
+    opacity: .6;
+    position: absolute;
+    width: 100%;
+    filter: url("data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%3E%3Cdefs%3E%3Cfilter%20id%3D%22blur%22%3E%3CfeGaussianBlur%20stdDeviation%3D%2215%22%2F%3E%3CfeComponentTransfer%3E%3CfeFuncR%20type%3D%22linear%22%20slope%3D%220.3%22%2F%3E%3CfeFuncG%20type%3D%22linear%22%20slope%3D%220.3%22%2F%3E%3CfeFuncB%20type%3D%22linear%22%20slope%3D%220.3%22%2F%3E%3C%2FfeComponentTransfer%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E#blur");
+    -webkit-filter: blur(5px) brightness(.7);
+    z-index: -1;
   }
-
-  body {
-    display: flex;
-  }
-
-  .container {
-    min-height: 100%;
-    display: flex;
-    flex-flow: column nowrap;
-    flex: 1;
-    transition: $swift-ease-out;
-    @media (min-width: 1281px) {
-      padding-left: $sizebar-size;
-    }
-  }
-  .left-menu {
-    position: fixed;
-    top: -64px;
-    left: -240px;
-    width: 240px;
-    height: 100vh;
-    display: inline-block;
-    background-color: #ccc;
-    .md-menu {
-      width: 100%;
-      height: 64px;  
-    }
-    .main-sidebar-links {
-      width: 100%;
-      .md-list-item a.router-link-active {
-        background-color: #e53935;
-        color: #ffffff !important;
-        i {
-          color: #ffffff !important;
-        }
-      }
-    }
-  }
-
-  .main-content {
-    padding: 16px;
-    flex: 1;
-    background-color: #fff;
-    transform: translate3D(0, 0, 0);
-    transition: $swift-ease-out;
-    transition-delay: .2s;
-  }
-
 </style>
 <script>
   import Vue from 'vue'
