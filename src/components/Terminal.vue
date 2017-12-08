@@ -12,9 +12,14 @@
       <p><strong>help</strong>:to find out more about the function.</p>
       <p><strong>back</strong> or <strong>exit</strong>:to back to home page.</p>
       <p><strong>about</strong>:to find out my <b>profile</b>.</p>
+      <p><strong>skills</strong>:to find out my <b>skills</b>.</p>
+      <p><strong>clean</strong>:clean screen.</p>
     </div>
     <div class="help" ref="about">
       My name is: Nguyen Ngoc Tuan Anh
+    </div>
+    <div class="help" ref="skills">
+      Nodejs, HTML & CSS
     </div>
   </div>
 </template>
@@ -71,13 +76,19 @@ export default {
           this.$router.push('/') 
           break;
         case 'help':
-          this.view = this.$refs.help.innerHTML;
+          this.view += this.$refs.help.innerHTML;
           break;
         case 'about':
-          this.view = this.$refs.about.innerHTML;
+          this.view += this.$refs.about.innerHTML;
+          break;
+        case 'skills':
+          this.view += this.$refs.skills.innerHTML;
+          break;
+        case 'clean':
+          this.view = "";
           break;
         default:
-          this.view = "";
+          this.view += "";
           break;
       }
     },
